@@ -1,8 +1,8 @@
 {
   "name": "@invisible/publish",
-  "license": "UNLICENSED",
-  "version": "0.0.1",
-  "description": "",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "Asserts a version bump and publishes your package to npm automatically",
   "engines": {
     "node": "^8.5.0"
   },
@@ -51,15 +51,10 @@
     "postinstall": "scripts/postinstall.sh",
     "prepublish": "nsp check",
     "pretest": "yarn run lint",
-    "test": "yarn run test-only",
-    "test-only": "NODE_ENV=test nyc mocha test/helpers/loadMocks.js $(find test -name '*.spec.js')"
+    "test": "yarn run lint"
   },
   "dependencies": {
-    "@invisible/logger": "^0.0.3",
-    "avow": "^4.0.3",
-    "common-tags": "^1.4.0",
     "cross-spawn": "^5.1.0",
-    "dotenv": "^4.0.0",
     "lodash": "^4.17.4"
   }
 }
