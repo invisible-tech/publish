@@ -4,22 +4,20 @@
 
 /* eslint no-console: 0 */
 
-require('dotenv').config()
-const logger = require('@invisible/logger')
 const spawn = require('cross-spawn')
 
-const { NPM_TOKEN } = process.env
+const { CIRCLE_BRANCH, NPM_TOKEN } = process.env
 
 if (! NPM_TOKEN) {
-  logger.warn('Required env var NPM_TOKEN is missing. Skipping for now.')
+  console.log('Required env var NPM_TOKEN is missing.')
   process.exit(1)
 }
 
-if (process.env.CIRCLE_BRANCH === 'master') {
+if (CIRCLE_BRANCH === 'master') {
   spawn('echo', [`//registry.npmjs.org/:_authToken=${NPM_TOKEN}`, '>', '~/.npmrc'])
   spawn('npm', ['publish'])
 } else {
-  logger.info('This is not master, skipping...')
+  console.log('This is not master, skipping...')
   process.exit(0)
 }
 
