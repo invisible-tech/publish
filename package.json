@@ -44,7 +44,8 @@
     "postinstall": "scripts/postinstall.sh",
     "prepublish": "nsp check",
     "pretest": "yarn run lint",
-    "test": "yarn run lint"
+    "test": "yarn run lint",
+    "posttest": "src/assertVersionBump.js"
   },
   "dependencies": {
     "cross-spawn": "^5.1.0",
