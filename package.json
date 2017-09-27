@@ -42,10 +42,9 @@
     "fix": "eslint --cache --fix scripts src test",
     "lint": "eslint --cache -f node_modules/eslint-formatter-pretty scripts src test",
     "postinstall": "scripts/postinstall.sh",
-    "prepublish": "nsp check",
     "pretest": "yarn run lint",
     "test": "yarn run lint",
-    "posttest": "src/assertVersionBump.js"
+    "posttest": "src/assertVersionBump.js && nsp check"
   },
   "dependencies": {
     "cross-spawn": "^5.1.0",
