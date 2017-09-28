@@ -15,7 +15,7 @@ if (! NPM_TOKEN) {
 
 if (CIRCLE_BRANCH === 'master') {
   spawn('echo', [`//registry.npmjs.org/:_authToken=${NPM_TOKEN}`, '>', '~/.npmrc'])
-  spawn('npm', ['publish'])
+  spawn('npm', ['publish', '--access=public'])
 } else {
   console.log('This is not master, skipping...')
   process.exit(0)
