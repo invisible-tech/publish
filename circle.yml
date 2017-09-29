@@ -1,6 +1,4 @@
 dependencies:
-  pre:
-    - 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'
   override:
     - yarn
 
@@ -25,4 +23,4 @@ deployment:
   release:
     branch: master
     commands:
-      - npm publish --access=public
+      - ./src/publish.js
