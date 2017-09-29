@@ -22,10 +22,10 @@ const logErrorAndExit = err => {
 }
 if (CIRCLE_BRANCH === 'master') {
   const { error: npmrcError } = spawn.sync('echo', [`//registry.npmjs.org/:_authToken=${NPM_TOKEN}`, '>', '~/.npmrc'])
-  if (isNull(npmrcError)) logErrorAndExit(npmrcError)
+  if (! isNull(npmrcError)) logErrorAndExit(npmrcError)
 
   const { stdout, error: publishError } = spawn.sync('npm', ['publish', '--access=public'])
-  if (isNull(publishError)) logErrorAndExit(publishError)
+  if (! isNull(publishError)) logErrorAndExit(publishError)
   console.log(stdout)
 } else {
   console.log('This is not master, skipping...')
