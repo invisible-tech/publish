@@ -10,7 +10,7 @@ const {
   isNull,
 } = require('lodash/fp')
 
-const { CIRCLE_BRANCH, NPM_TOKEN } = process.env
+const { CIRCLE_BRANCH, NPM_TOKEN, HOME } = process.env
 
 if (! NPM_TOKEN) {
   console.log('Required env var NPM_TOKEN is missing.')
@@ -22,7 +22,7 @@ const logErrorAndExit = err => {
   process.exit(1)
 }
 if (CIRCLE_BRANCH === 'master') {
-  fs.writeFileSync('~/.npmrc', `//registry.npmjs.org/:_authToken=${NPM_TOKEN}`, 'utf8')
+  fs.writeFileSync(`${HOME}/.npmrc`, `//registry.npmjs.org/:_authToken=${NPM_TOKEN}`, 'utf8')
 
   const { error: publishError } = spawn.sync('npm', ['publish', '--access=public'], { stdio: 'inherit' })
   if (! isNull(publishError)) logErrorAndExit(publishError)
