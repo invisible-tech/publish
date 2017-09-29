@@ -4,6 +4,7 @@
 
 /* eslint no-console: 0 */
 
+const fs = require('fs')
 const spawn = require('cross-spawn')
 const {
   isNull,
@@ -21,8 +22,7 @@ const logErrorAndExit = err => {
   process.exit(1)
 }
 if (CIRCLE_BRANCH === 'master') {
-  const { error: npmrcError } = spawn.sync('echo', [`//registry.npmjs.org/:_authToken=${NPM_TOKEN}`, '>', '~/.npmrc'], { stdio: 'inherit' })
-  if (! isNull(npmrcError)) logErrorAndExit(npmrcError)
+  fs.writeFileSync('~/.npmrc', `//registry.npmjs.org/:_authToken=${NPM_TOKEN}`, 'utf8')
 
   const { error: publishError } = spawn.sync('npm', ['publish', '--access=public'], { stdio: 'inherit' })
   if (! isNull(publishError)) logErrorAndExit(publishError)
