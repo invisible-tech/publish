@@ -22,7 +22,7 @@
   "main": "src/index.js",
   "keywords": [],
   "devDependencies": {
-    "@invisible/eslint-config": "1.1.1",
+    "@invisible/eslint-config": "1.1.2",
     "docdash": "0.4.0",
     "eslint": "4.8.0",
     "jsdoc": "3.5.5",
