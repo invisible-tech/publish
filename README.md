@@ -1,5 +1,7 @@
 # @invisible/publish
 
+[![CircleCI](https://circleci.com/gh/invisible-tech/publish/tree/master.svg?style=svg)](https://circleci.com/gh/invisible-tech/publish/tree/master)
+
 Asserts a version bump and publishes your package to npm automatically.
 
 # Install
