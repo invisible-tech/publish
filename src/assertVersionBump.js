@@ -11,7 +11,6 @@ const {
   find,
   flow,
   join,
-  last,
   map,
   negate,
   overEvery,
@@ -28,20 +27,33 @@ if (CIRCLE_BRANCH === 'master') {
   process.exit(0)
 }
 
-const { stdout: testPackage } = spawn.sync('git', ['diff', '--name-only', 'origin/master...HEAD', '--', 'package.json'])
+const { stdout: testPackage } = spawn.sync('git', [
+  'diff',
+  '--name-only',
+  'origin/master...HEAD',
+  '--',
+  'package.json',
+])
 
-const { stdout: log } = spawn.sync('git', ['--no-pager', 'log', '--merges', '-1', '--minimal', '--unified=0'])
+const { stdout: lastMergeHash } = spawn.sync('git', [
+  'log',
+  '--merges',
+  '-1',
+  '--pretty=format:%h',
+])
 const splitLines = split('\n')
-const getLastMergeHash = flow(
-  splitLines,
-  filter(startsWith('commit')),
-  last,
-  split(' '),
-  last
-)
-const lastMergeHash = getLastMergeHash(log)
 
-const { stdout: diff } = spawn.sync('git', ['--no-pager', 'diff', `${lastMergeHash}..HEAD`, '--minimal', '--unified=0', '--no-color', '--', 'package.json'])
+const { stdout: diff } = spawn.sync('git', [
+  '--no-pager',
+  'diff',
+  `${lastMergeHash}..HEAD`,
+  '--minimal',
+  '--unified=0',
+  '--no-color',
+  '--',
+  'package.json',
+])
+
 const getAdditions = flow(
   splitLines,
   filter(overEvery([
