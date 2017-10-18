@@ -20,6 +20,8 @@ const {
   trimCharsStart,
 } = require('lodash/fp')
 
+const [ , , fileName = 'package.json' ] = process.argv
+
 const { CIRCLE_BRANCH } = process.env
 
 if (CIRCLE_BRANCH === 'master') {
@@ -32,7 +34,7 @@ const { stdout: testPackage } = spawn.sync('git', [
   '--name-only',
   'origin/master...HEAD',
   '--',
-  'package.json',
+  fileName,
 ])
 
 const { stdout: lastMergeHash } = spawn.sync('git', [
@@ -51,7 +53,7 @@ const { stdout: diff } = spawn.sync('git', [
   '--unified=0',
   '--no-color',
   '--',
-  'package.json',
+  fileName,
 ])
 
 const getAdditions = flow(
@@ -73,7 +75,7 @@ const searchVersionChange = flow(
 const version = searchVersionChange(additionsText)
 
 if (! version || ! testPackage) {
-  console.log('This PR is missing a version bump in package.json')
+  console.log(`This PR is missing a version bump in ${fileName}`)
   process.exit(1)
 } else {
   process.exit(0)
