@@ -42,6 +42,13 @@ deployment:
       - publish
 ```
 
+4. OPTIONAL: you can pass the filename as argument to assert version bump. Defaults to `package.json`
+```json
+"scripts": {
+    "posttest": "assert-version-bump manifest.json"
+  }
+```
+
 # Troubleshooting
 
 If you are having problems, it probably is because you don't have your package `.bin` folder set on `PATH`.
