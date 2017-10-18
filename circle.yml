@@ -27,3 +27,4 @@ deployment:
     branch: master
     commands:
       - bin/publish
+      - push-changelog-update || true
