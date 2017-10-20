@@ -37,7 +37,7 @@
     "lint": "eslint --cache -f node_modules/eslint-formatter-pretty scripts src test",
     "pretest": "yarn run lint",
     "test": "exit 0",
-    "posttest": "bin/assert-version-bump && assert-changelog-update && nsp check"
+    "posttest": "scripts/posttest.sh"
   },
   "dependencies": {
     "cross-spawn": "^5.1.0",
