@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+'use strict'
+
+const { CIRCLE_BRANCH } = process.env
+
+const {
+  lastVersionChange,
+  lastMergeHash,
+} = require('../index.js')
+
+if (CIRCLE_BRANCH === 'master') {
+  console.log('This is master, skipping.')
+  process.exit(0)
+}
+
+if (! lastVersionChange()) {
+  console.log(`assert-version-bump: no version bump since ${lastMergeHash()}`)
+  process.exit(1)
+} else {
+  process.exit(0)
+}

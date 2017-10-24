@@ -1,7 +1,7 @@
 {
   "name": "@invisible/publish",
   "license": "MIT",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "Asserts a version bump and publishes your package to npm automatically",
   "engines": {
     "node": "^8.5.0"
@@ -13,26 +13,20 @@
     "url": "https://github.com/invisible-tech"
   },
   "bin": {
-    "assert-version-bump": "src/assertVersionBump.js",
-    "publish": "src/publish.js"
+    "assert-version-bump": "bin/assert-version-bump",
+    "publish": "bin/publish"
   },
-  "files": [
-    "src"
-  ],
-  "main": "src/index.js",
+  "main": "index.js",
   "keywords": [],
   "devDependencies": {
+    "@invisible/changelog-update": "^1.0.8",
     "@invisible/eslint-config": "^1.1.3",
     "docdash": "^0.4.0",
     "eslint": "^4.7.2",
     "jsdoc": "^3.5.4",
     "mocha": "^3.5.3",
-    "mock-require": "^2.0.2",
     "nsp": "^2.8.0",
     "nyc": "^11.2.1",
-    "recursive-readdir": "^2.2.1",
-    "sinon": "^3.2.1",
-    "sinon-express-mock": "^1.3.1",
     "yarn": "^0.27.5"
   },
   "repository": "git@github.com:invisible-tech/publish.git",
@@ -43,10 +37,15 @@
     "lint": "eslint --cache -f node_modules/eslint-formatter-pretty scripts src test",
     "pretest": "yarn run lint",
     "test": "exit 0",
-    "posttest": "src/assertVersionBump.js && nsp check"
+    "posttest": "scripts/posttest.sh"
   },
   "dependencies": {
     "cross-spawn": "^5.1.0",
     "lodash": "^4.17.4"
+  },
+  "changelogUpdate": {
+    "slackbotName": "@invisible/publish",
+    "iconEmoji": "rocket",
+    "changelogFile": "ANNOUNCEMENTS.md"
   }
 }
