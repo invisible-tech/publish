@@ -5,14 +5,16 @@
 const fs = require('fs')
 const spawn = require('cross-spawn')
 
-const { CIRCLE_BRANCH, NPM_TOKEN, HOME } = process.env
+const { currentBranch } = require('../index.js')
+
+const { NPM_TOKEN, HOME } = process.env
 
 if (! NPM_TOKEN) {
   console.log('publish: NPM_TOKEN is required')
   process.exit(1)
 }
 
-if (CIRCLE_BRANCH === 'master') {
+if (currentBranch() === 'master') {
   fs.writeFileSync(`${HOME}/.npmrc`, `//registry.npmjs.org/:_authToken=${NPM_TOKEN}`, 'utf8')
 
   spawn.sync('npm', ['publish', '--access=public'], { stdio: 'inherit' })
