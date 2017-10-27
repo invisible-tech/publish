@@ -2,14 +2,13 @@
 
 'use strict'
 
-const { CIRCLE_BRANCH } = process.env
-
 const {
+  currentBranch,
   lastVersionChange,
   lastMergeHash,
 } = require('../index.js')
 
-if (CIRCLE_BRANCH === 'master') {
+if (currentBranch() === 'master') {
   console.log('This is master, skipping.')
   process.exit(0)
 }

@@ -16,6 +16,15 @@ const {
   trimCharsStart,
 } = require('lodash/fp')
 
+const currentBranch = () => {
+  const { stdout: branch } = spawn.sync(
+    'git',
+    ['rev-parse', '--abbrev-ref', 'HEAD'],
+    { encoding: 'utf8' }
+  )
+  return trim(branch)
+}
+
 const lastMergeHash = () => {
   const { stdout } = spawn.sync(
     'git',
@@ -67,6 +76,7 @@ const lastVersionChange = () => {
 }
 
 module.exports = {
+  currentBranch,
   lastVersionChange,
   lastMergeHash,
 }
