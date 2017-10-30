@@ -1,6 +1,6 @@
 #!/bin/sh
 
-bin/assert-version-bump
+bin/assert-version-bump --quiet
 status=$?
 
 assert-changelog-update --quiet
