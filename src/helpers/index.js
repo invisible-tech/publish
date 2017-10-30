@@ -51,7 +51,7 @@ const getAdditions = flow(
   join('\n')
 )
 
-const lastVersionChange = () => {
+const lastVersionChange = ({ fileName }) => {
   const { stdout } = spawn.sync(
     'git',
     [
@@ -62,7 +62,7 @@ const lastVersionChange = () => {
       '--unified=0',
       '--no-color',
       '--',
-      'package.json',
+      fileName,
     ],
     { encoding: 'utf8' }
   )
