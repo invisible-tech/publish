@@ -16,7 +16,7 @@
     "assert-version-bump": "bin/assert-version-bump",
     "publish": "bin/publish"
   },
-  "main": "index.js",
+  "main": "src/index.js",
   "keywords": [],
   "devDependencies": {
     "@invisible/changelog-update": "^1.0.8",
@@ -41,7 +41,11 @@
   },
   "dependencies": {
     "cross-spawn": "^5.1.0",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "yargs": "^10.0.3"
+  },
+  "optionalDependencies": {
+    "dotenv": "^4.0.0"
   },
   "changelogUpdate": {
     "slackbotName": "@invisible/publish",
