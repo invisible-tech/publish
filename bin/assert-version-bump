@@ -2,20 +2,18 @@
 
 'use strict'
 
-const {
-  currentBranch,
-  lastVersionChange,
-  lastMergeHash,
-} = require('../index.js')
+const { argv } = require('yargs')
+  .boolean(['quiet'])
+  .alias('quiet', 'q')
 
-if (currentBranch() === 'master') {
-  console.log('This is master, skipping.')
+const assertVersionBump = require('../src/assertVersionBump.js')
+
+try {
+  const newVersion = assertVersionBump({ fileName: argv._[0] })
+  if (! argv.quiet && ! newVersion) console.log('assert-version-bump: This is master, skipping.')
+  if (! argv.quiet && newVersion) console.log('assert-version-bump: new version found.')
   process.exit(0)
-}
-
-if (! lastVersionChange()) {
-  console.log(`assert-version-bump: no version bump since ${lastMergeHash()}`)
+} catch (err) {
+  console.log(err.message)
   process.exit(1)
-} else {
-  process.exit(0)
 }

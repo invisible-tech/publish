@@ -2,24 +2,28 @@
 
 'use strict'
 
-const fs = require('fs')
-const spawn = require('cross-spawn')
+const assert = require('assert')
+const { argv } = require('yargs')
+  .boolean(['quiet'])
+  .alias('quiet', 'q')
 
-const { currentBranch } = require('../index.js')
+const publish = require('../src/publish')
 
-const { NPM_TOKEN, HOME } = process.env
+try {
+  const dotenv = require('dotenv')
+  dotenv.config()
+} catch (err) {
+  // dotenv is optional dependency, don't throw if it's not installed
+}
 
-if (! NPM_TOKEN) {
-  console.log('publish: NPM_TOKEN is required')
+const { NPM_TOKEN, NPMRC_DIR } = process.env
+
+try {
+  assert(NPM_TOKEN, 'publish: NPM_TOKEN is required')
+  const published = publish({ NPM_TOKEN, NPMRC_DIR })
+  if (! argv.quiet && ! published) console.log('publish: Not on master branch, skipping.')
+  if (! argv.quiet && published) console.log('publish: new version published to npm.')
+} catch (err) {
+  console.log(err.message)
   process.exit(1)
 }
-
-if (currentBranch() === 'master') {
-  fs.writeFileSync(`${HOME}/.npmrc`, `//registry.npmjs.org/:_authToken=${NPM_TOKEN}`, 'utf8')
-
-  spawn.sync('npm', ['publish', '--access=public'], { stdio: 'inherit' })
-} else {
-  console.log('publish: Not on master branch, skipping')
-  process.exit(0)
-}
-
