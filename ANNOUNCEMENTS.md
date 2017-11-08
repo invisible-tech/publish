@@ -1,6 +1,17 @@
 # Announcements
 > All notable changes to this project will be documented in this file.
 
+## [2.0.0] - 2017-10-24
+### Feat
+  - Make assertVersionBump check current version on npm.
+  - Refact: programatically usage.
+
+### Breaking Changes
+  - Programatically `assertVersionBump` does not throw anymore, otherwise it returns a promise of an object with `pass` and `msg` as keys.
+  - Programatically `publish` does not return a boolean anymore, otherwise it returns an object with `pass` and `msg` as keys.
+
+[2.0.0]: https://github.com/invisible-tech/merge-parsers/compare/v1.3.0...v2.0.0
+
 ## [1.3.1] - 2017-11-02
 ### Chore
   - Check if `.npmrc` is present and if true, do not overwrite.
