@@ -21,18 +21,32 @@ npm install -D @invisible/publish
 
 const {
   assertVersionBump,
-  publish
+  publish,
 } = require('@invisible/publish')
 
-// fileName defaults to 'package.json' if no argument given.
-// This method will throw if no addition has been made to 'fileName' since
-// the last merge commit
-assertVersionBump({ fileName: 'package.json' })
+const newRelease = async () => {
+  {
+    // fileName defaults to 'package.json' if no argument given.
+    // This method return a promise of an object with pass and msg as keys.
+    const { pass, msg } = await assertVersionBump({ fileName: 'package.json' })
+    // You can process the results as you wish. As an example, you can consume it like below:
+    if (msg) console.log(`assert-version-bump: ${msg}`)
+    if (! pass) process.exit(1)
+  }
 
-// NPMRC_DIR defaults to 'process.env.HOME' if no argument given.
-const { NPM_TOKEN, NPMRC_DIR } = process.env
+  {
+    const { NPM_TOKEN, NPMRC_DIR } = process.env
 
-publish({ NPM_TOKEN, NPMRC_DIR })
+    // NPMRC_DIR defaults to 'process.env.HOME' if no argument given.
+    // This method return an object with pass and msg as keys.
+    const { pass, msg } = publish({ NPM_TOKEN, NPMRC_DIR })
+    // You can process the results as you wish. As an example, you can consume it like below:
+    if (msg) console.log(`publish: ${msg}`)
+    if (pass) process.exit(0)
+    process.exit(1)
+  }
+}
+newRelease()
 ```
 
 ### Hook Scripts
