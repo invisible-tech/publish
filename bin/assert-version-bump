@@ -2,18 +2,21 @@
 
 'use strict'
 
+const assert = require('assert')
 const { argv } = require('yargs')
   .boolean(['quiet'])
   .alias('quiet', 'q')
 
 const assertVersionBump = require('../src/assertVersionBump.js')
 
-try {
-  const newVersion = assertVersionBump({ fileName: argv._[0] })
-  if (! argv.quiet && ! newVersion) console.log('assert-version-bump: This is master, skipping.')
-  if (! argv.quiet && newVersion) console.log('assert-version-bump: new version found.')
-  process.exit(0)
-} catch (err) {
-  console.log(err.message)
-  process.exit(1)
-}
+assertVersionBump({ fileName: argv._[0] })
+  .then(({ pass, msg } = {}) => {
+    assert(pass !== undefined)
+    if (msg && ! argv.quiet) console.log(`assert-version-bump: ${msg}`)
+    if (pass) return process.exit(0)
+    return process.exit(1)
+  })
+  .catch(err => {
+    console.log(err)
+    process.exit(1)
+  })
