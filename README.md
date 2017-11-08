@@ -60,7 +60,7 @@ $ assert-version-bump --quiet # will silently succeed, but output error if not f
 ```
 
 #### publish
-Add `publish` to the `commands` on `deployment` section of your package `circle.yml`:
+- Add `publish` to the `commands` on `deployment` section of your package `circle.yml`:
 ```yaml
 # It would look something like:
 deployment:
@@ -71,10 +71,10 @@ deployment:
 ```
 `NPM_TOKEN` environmental variable is required for publishing. See [Miscellaneous Information](#miscellaneous-information) to know options on how to add it.
 
-You can also run it at any time from your CLI.
+You can also run it at any time from your CLI. Just make sure you are on `master` branch and have a `~/.npmrc` file with a valid token.
 ```bash
-$ push-changelog-update
-$ push-changelog-update --quiet # will silently succeed, but output error.
+$ publish
+$ publish --quiet # will silently succeed, but output error.
 ```
 
 # Miscellaneous Information
