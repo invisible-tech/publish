@@ -1,6 +1,10 @@
 # Announcements
 > All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2017-11-10
+### Feat
+  - Add `postinstall` script that checks `publish` command on `circle.yml` file.
+
 ## [1.3.0] - 2017-10-26
 ### Feat
   - Export assertVersionBump and publish for programatically usage.
