@@ -57,7 +57,7 @@ const lastVersionChange = ({ fileName }) => {
     [
       '--no-pager',
       'diff',
-      `${lastMergeHash()}..HEAD`,
+      'origin/master..HEAD',
       '--minimal',
       '--unified=0',
       '--no-color',
