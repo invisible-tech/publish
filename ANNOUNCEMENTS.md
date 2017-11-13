@@ -1,6 +1,10 @@
 # Announcements
 > All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2017-11-13
+### Feat
+  - Assert version bump should work since first pull request.
+
 ## [1.3.1] - 2017-11-02
 ### Chore
   - Check if `.npmrc` is present and if true, do not overwrite.
