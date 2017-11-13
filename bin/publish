@@ -2,7 +2,6 @@
 
 'use strict'
 
-const assert = require('assert')
 const { argv } = require('yargs')
   .boolean(['quiet'])
   .alias('quiet', 'q')
@@ -19,7 +18,6 @@ try {
 const { NPM_TOKEN, NPMRC_DIR } = process.env
 
 try {
-  assert(NPM_TOKEN, 'publish: NPM_TOKEN is required')
   const published = publish({ NPM_TOKEN, NPMRC_DIR })
   if (! argv.quiet && ! published) console.log('publish: Not on master branch, skipping.')
   if (! argv.quiet && published) console.log('publish: new version published to npm.')

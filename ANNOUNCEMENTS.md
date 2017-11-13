@@ -1,6 +1,12 @@
 # Announcements
 > All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2017-11-02
+### Chore
+  - Check if `.npmrc` is present and if true, do not overwrite.
+
+[1.3.1]: https://github.com/invisible-tech/merge-parsers/compare/v1.3.0...v1.3.1
+
 ## [1.3.0] - 2017-10-26
 ### Feat
   - Export assertVersionBump and publish for programatically usage.
