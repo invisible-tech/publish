@@ -52,6 +52,7 @@ const getAdditions = flow(
 )
 
 const lastVersionChange = ({ fileName }) => {
+  // TODO: git fetch to update refs
   const { stdout } = spawn.sync(
     'git',
     [
