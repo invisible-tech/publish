@@ -3,7 +3,7 @@
 
 ## [1.4.0] - 2017-11-13
 ### Feat
-  - Assert version bump should work since first pull request.
+  - Make `assert-version-bump` work since first pull request.
 
 ## [1.3.1] - 2017-11-02
 ### Chore
