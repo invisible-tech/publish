@@ -1,5 +1,7 @@
 'use strict'
 
+const finder = require('find-package-json')
+const pacote = require('pacote')
 const spawn = require('cross-spawn')
 
 const {
@@ -15,6 +17,20 @@ const {
   trim,
   trimCharsStart,
 } = require('lodash/fp')
+
+const pkg = finder().next().value || {}
+
+// () => Promise[Boolean]
+const hasBeenPublished = async () => {
+  try {
+    const { version: npmPackageVersion } = await pacote.manifest(pkg.name)
+    if (npmPackageVersion === pkg.version) return true
+    return false
+  } catch (e) {
+    console.log('assert-version-bump: This package has not been published yet.')
+    process.exit(0)
+  }
+}
 
 const currentBranch = () => {
   const { stdout: branch } = spawn.sync(
@@ -51,7 +67,7 @@ const getAdditions = flow(
   join('\n')
 )
 
-const lastVersionChange = ({ fileName }) => {
+const versionHasChanged = ({ fileName }) => {
   const { stdout } = spawn.sync(
     'git',
     [
@@ -77,6 +93,7 @@ const lastVersionChange = ({ fileName }) => {
 
 module.exports = {
   currentBranch,
-  lastVersionChange,
+  hasBeenPublished,
   lastMergeHash,
+  versionHasChanged,
 }
