@@ -1,3 +1,7 @@
 {
-  "extends": [":library"]
+  "bumpVersion": "patch",
+  "commitMessage": "chore: Update dependency {{depName}} to version {{newVersion}}",
+  "extends": ["group:all", "schedule:weekends"],
+  "labels": ["0 For Review"],
+  "pinVersions": false
 }
