@@ -1,6 +1,13 @@
 # Announcements
 > All notable changes to this project will be documented in this file.
 
+## [2.0.1] - 2018-02-20
+### Internal
+  - Update pacote dependency.
+  - Add Known Issues to README
+
+[2.0.1]: https://github.com/invisible-tech/merge-parsers/compare/v2.0.0...v2.0.1
+
 ## [2.0.0] - 2017-10-24
 ### Feat
   - Make assertVersionBump check current version on npm.
