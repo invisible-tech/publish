@@ -115,5 +115,13 @@ machine:
     PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 ```
 
+# Known Issues
+
+`assert-version-bump` does not work on the first PR because it asserts through diff of HEAD and last merge commit.
+
+# TODO
+
+Make `assert-version-bump` work since first PR.
+
 # LICENSE
 MIT
