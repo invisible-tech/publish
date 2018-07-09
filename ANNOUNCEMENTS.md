@@ -1,6 +1,10 @@
 # Announcements
 > All notable changes to this project will be documented in this file.
 
+## [2.0.2] - 2018-07-09
+### Internal
+  - Update CircleCI to version 2
+
 ## [2.0.1] - 2018-02-20
 ### Internal
   - Update pacote dependency.
