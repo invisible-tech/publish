@@ -1,14 +1,15 @@
 'use strict'
 
 const assert = require('assert')
-const fileExists = require('file-exists')
 const fs = require('fs')
 const path = require('path')
+
+const fileExists = require('file-exists')
 const spawn = require('cross-spawn')
 
 const {
   currentBranch,
-} = require('./helpers/index')
+} = require('./helpers')
 
 const run = ({ NPM_TOKEN, NPMRC_DIR = process.env.HOME } = {}) => {
   if (currentBranch() !== 'master') {

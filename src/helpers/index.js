@@ -26,9 +26,9 @@ const hasBeenPublished = async () => {
     const { version: npmPackageVersion } = await pacote.manifest(pkg.name)
     if (npmPackageVersion === pkg.version) return true
     return false
-  } catch (e) {
+  } catch (err) {
     console.log('assert-version-bump: This package has not been published yet.')
-    process.exit(0)
+    process.exit(0) // eslint-disable-line unicorn/no-process-exit
   }
 }
 
