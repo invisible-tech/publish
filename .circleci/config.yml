@@ -1,0 +1,84 @@
+version: 2.0
+jobs:
+  checkout:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v2-dependencies-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install Dependencies
+          command: ls && npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v2-dependencies-{{ checksum "package-lock.json" }}
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./*
+            - node_modules
+
+  lint:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:8
+    environment:
+      - NODE_ENV: test
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Lint TypeScript code
+          command: npm run lint
+
+  test:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:10
+    environment:
+
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Run Tests
+          command: npm run test-only
+
+  publish:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:8
+    environment:
+      - NODE_ENV: production
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+         name: Publish NPM Package
+         command: ./bin/publish
+      - run:
+          name: Publish Changelog
+          command: ./node_modules/.bin/push-changelog-update || true
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - checkout
+      - test:
+          requires:
+            - checkout
+      - lint:
+          requires:
+            - checkout
+      - publish:
+          requires:
+            - checkout
+            - test
+          filters:
+            branches:
+              only: master

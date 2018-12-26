@@ -14,8 +14,8 @@
     "url": "https://github.com/invisible-tech"
   },
   "bin": {
-    "assert-version-bump": "bin/assert-version-bump",
-    "publish": "bin/publish"
+    "assert-version-bump": "bin/assert-version-bump.js",
+    "publish": "bin/publish.js"
   },
   "main": "src/index.js",
   "keywords": [],
@@ -29,11 +29,12 @@
   "repository": "git@github.com:invisible-tech/publish.git",
   "scripts": {
     "coverage": "nyc report --reporter=lcov --reporter=html --reporter=text-summary --reporter=text",
-    "lint:fix": "npm run lint -- --fix",
     "lint": "eslint --cache -f node_modules/eslint-formatter-pretty \"{bin,scripts,src,test}/**/*.js\"",
+    "lint:fix": "npm run lint -- --fix",
+    "posttest": "scripts/posttest.sh",
     "pretest": "npm run lint",
-    "test": "exit 0",
-    "posttest": "scripts/posttest.sh"
+    "test": "npm run test-only",
+    "test-only": "exit 0"
   },
   "dependencies": {
     "cross-spawn": "^6.0.5",
