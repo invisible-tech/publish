@@ -6,7 +6,7 @@ status=$?
 assert-changelog-update --quiet
 status=$(( $status + $? ))
 
-nsp check
+npm audit
 status=$(( $status + $? ))
 
 if [ $status -eq 0 ]
