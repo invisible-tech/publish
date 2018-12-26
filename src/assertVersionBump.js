@@ -5,7 +5,7 @@ const {
   hasBeenPublished,
   lastMergeHash,
   versionHasChanged,
-} = require('./helpers/index.js')
+} = require('./helpers')
 
 const run = async ({ fileName = 'package.json' } = {}) => {
   if (currentBranch() === 'master') {
