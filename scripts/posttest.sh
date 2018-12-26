@@ -1,6 +1,6 @@
 #!/bin/sh
 
-bin/assert-version-bump --quiet
+bin/assert-version-bump.js --quiet
 status=$?
 
 assert-changelog-update --quiet
