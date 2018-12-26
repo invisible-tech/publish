@@ -59,7 +59,7 @@ jobs:
           at: ~/project
       - run:
          name: Publish NPM Package
-         command: ./bin/publish
+         command: ./bin/publish.js
       - run:
           name: Publish Changelog
           command: ./node_modules/.bin/push-changelog-update || true
