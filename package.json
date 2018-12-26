@@ -1,10 +1,10 @@
 {
   "name": "@invisible/publish",
   "license": "MIT",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Asserts a version bump and publishes your package to npm automatically",
   "engines": {
-    "node": "^8.5.0"
+    "node": ">=8.5.0"
   },
   "homepage": "",
   "author": {
